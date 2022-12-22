@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="utf-8"?>
+<search> 
+  
+  
+    
+    <entry>
+      <title>如何用VMware虚拟机安装macOS</title>
+      <link href="/2022/12/21/%E5%A6%82%E4%BD%95%E7%94%A8VMware%E8%99%9A%E6%8B%9F%E6%9C%BA%E5%AE%89%E8%A3%85macOS/"/>
+      <url>/2022/12/21/%E5%A6%82%E4%BD%95%E7%94%A8VMware%E8%99%9A%E6%8B%9F%E6%9C%BA%E5%AE%89%E8%A3%85macOS/</url>
+      
+        <content type="html"><![CDATA[<link rel="stylesheet" class="aplayer-secondary-style-marker" href="\assets\css\APlayer.min.css"><script src="\assets\js\APlayer.min.js" class="aplayer-secondary-script-marker"></script><p>怎样在电脑的VMware虚拟机中正确安装黑苹果呢？接下来，我就分享一下我的整个安装过程，从中，大家会发现，VMware虚拟机居然还隐藏了这么多的玄机。</p><p>第一步：下载必要文件。<br>我们需要下载3处文件：VMware虚拟机软件、苹果补丁unlocker、苹果系统镜像文件，大家可以百度一下，就可以找到它们，也可以在文章下方评论索取，我们第一时间把下载链接发给你。</p><p>第二步：安装VMware虚拟机。<br>VMware虚拟机安装还是很简单的，跟其它软件安装方法一样，直接双击它，然后一直点击“下一步”就可以了。</p><p>第三步：打苹果补丁。<br>如果没有给虚拟机打补丁，在创建新的虚拟机时，在“客户机操作系统”选择界面，就看不到苹果的mac系统选项，我们也就没办法安装mac系统，所以，这一步是必须的，我们必须要给vmware虚拟机打上苹果补丁。</p><p>打开下载好的unlocker文件夹，里面有很多的文件。</p><p>鼠标移到win-install.cmd文件的上方，单击右键，在弹出的右键菜单中，点击“以管理员身份运行”，就会运行这个文件，运行完成后，苹果补丁就打好了。打好补丁后，我们再创建新的虚拟机，就可以看到苹果系统的选项了。</p><p>第四步：创建一个虚拟机。<br>打开VMware虚拟机软件，点击“创建新的虚拟机”按钮 。</p><p>选择“自定义”，然后点击“下一步”。</p><p>选择“workstation10.x” ，这一步也是很关键的。</p><p>选择“安装程序光盘映像文件”。</p><p>点击“浏览”，在弹出的窗口右下角，选择显示“所有文件” ，这样才会在列表中显示cdr后缀的镜像文件，然后选择我们下载的镜像文件。</p><p>在“选择客户机操作系统”界面，选择“apple mac os x”，然后再在下拉列表中选择系统版本，要与我们下载的镜像文件的版本对应上，如：我们下载的镜像版本是mac10.15，这里我们就要选择macos 10.15 。</p><p>这时会弹出提示窗 ，我们直接点击“是”。</p><p>选择虚拟机的安装位置，这里我选择“D:\vmware\mac”这个位置。</p><p>后面的每一步，都可以直接点击“下一步”就可以了，直到完成。当然，内存我们可以根据自己电脑的配置情况，把它设置得大一些，不要低于4G，否则，运行起来，可能会有点卡顿。</p><p>第五步：设置这个虚拟机。<br>创建好虚拟机后，我们还需要对它进行一些设置。点击上图的“编辑虚拟机设置” 。为了通用鼠标和键盘，我们选择“USB控制器”，勾选“显示所有USB输入设备”。</p><p>然后点击上图的“选项”，显示 。在“客户机操作系统”处选择“microsoft windows”，这一项也是必须的，否则虚拟机不能正确引导安装。然后点击“确定”按钮进行保存。</p><p>第六步：修改虚拟机VMX文件。<br>通过上面5步，虚拟机就创建成功了，虽然可以运行，但在运行过程中，会弹出“客户机操作系统已禁用CPU，请关闭或重置虚拟机”的提示窗，导致无法继续安装mac系统。</p><p>很多人之所以安装失败，就是停在了这一步，而无法前进，我也曾经被这一步难到过。这里，我们需要修改这个虚拟机的VMX文件，这一步最关键。</p><p>在这个新建的虚拟机目录里，找到vmx后缀的文件（ 的macos 10.15.vmx）。</p><p>用记事本打开它，在末尾添加标红的代码，然后保存它就可以了，然后，就可以正常运行虚拟机了，接着就可以安装mac系统了。</p><p>代码如下：</p><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><span class="line">smc.version = &quot;0&quot;</span><br><span class="line"></span><br><span class="line">cpuid.0.eax = &quot;0000:0000:0000:0000:0000:0000:0000:1011&quot;</span><br><span class="line"></span><br><span class="line">cpuid.0.ebx = &quot;0111:0101:0110:1110:0110:0101:0100:0111&quot;</span><br><span class="line"></span><br><span class="line">cpuid.0.ecx = &quot;0110:1100:0110:0101:0111:0100:0110:1110&quot;</span><br><span class="line"></span><br><span class="line">cpuid.0.edx = &quot;0100:1001:0110:0101:0110:1110:0110:1001&quot;</span><br><span class="line"></span><br><span class="line">cpuid.1.eax = &quot;0000:0000:0000:0001:0000:0110:0111:0001&quot;</span><br><span class="line"></span><br><span class="line">cpuid.1.ebx = &quot;0000:0010:0000:0001:0000:1000:0000:0000&quot;</span><br><span class="line"></span><br><span class="line">cpuid.1.ecx = &quot;1000:0010:1001:1000:0010:0010:0000:0011&quot;</span><br><span class="line"></span><br><span class="line">cpuid.1.edx = &quot;0000:0111:1000:1011:1111:1011:1111:1111&quot;</span><br><span class="line"></span><br><span class="line">smbios.reflectHost = &quot;TRUE&quot;</span><br><span class="line"></span><br><span class="line">hw.model = &quot;MacBookPro14,3&quot;</span><br><span class="line"></span><br><span class="line">board-id = &quot;Mac-551B86E5744E2388&quot;</span><br><span class="line"></span><br><span class="line">keyboard.vusb.enable = &quot;TRUE&quot;</span><br><span class="line"></span><br><span class="line">mouse.vusb.enable = &quot;TRUE&quot;</span><br></pre></td></tr></table></figure><p>第七步：安装mac系统。<br>打好补丁后，我们就可以正常安装mac系统了。</p><p>这里选择“简体中文”，这样，安装界面就会是中文的了，我们也看得懂。</p><p>这里安装的是mac10.15，所以安装过程中会弹出“macos实用工具”窗口。点击“磁盘工具”，我们要对磁盘进行格式化。</p><p>然后选择我在虚拟机中创建的虚拟硬盘，再点击“抹掉”按钮，对这个虚拟硬盘进行格式化。</p><p>然后，点击左上角的关闭按钮，关闭窗口。</p><p>回到“实用工具”界面，再点击“安装macos”，就会开始安装mac系统了。</p><p>选择安装的虚拟硬盘</p><p>然后按提示进行相关的设置，就可以完成安装了。</p><p>第八步：修改虚拟机启动CD。<br>在安装过程中，会重启一次，重启的时候，如果我们不对虚拟机CD/DVD进行修改的话，可能会重复出现下图这个界面，从而不能继续安装下去。</p><p>这时，我们点击虚拟机的“CD/DVD”选择 。</p><p>勾选“使用物理驱动器”选项，这是为了避免安装过程中重复读取镜像文件而进行重复安装。</p><p>然后，就可以接着完成安装mac系统了。</p><p>通过上面8步，我们就完成了电脑虚拟机上安装苹果mac系统。这8步当中，有3步是非常关键的：第三步、第五步、第六步，少了这3步的任何一步，安装都会失败的</p><p>虚拟机资源下载：<a href="http://www.aiwanmao.cn/">链接</a></p>]]></content>
+      
+      
+      
+        <tags>
+            
+            <tag> 系统 </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
+      <title>StoneBot1.0.2发布！</title>
+      <link href="/2022/12/21/StoneBot1-0-2%E5%8F%91%E5%B8%83%EF%BC%81/"/>
+      <url>/2022/12/21/StoneBot1-0-2%E5%8F%91%E5%B8%83%EF%BC%81/</url>
+      
+        <content type="html"><![CDATA[<link rel="stylesheet" class="aplayer-secondary-style-marker" href="\assets\css\APlayer.min.css"><script src="\assets\js\APlayer.min.js" class="aplayer-secondary-script-marker"></script><h1 id="🎉这里是StoneBot官网🎉！"><a href="#🎉这里是StoneBot官网🎉！" class="headerlink" title="🎉这里是StoneBot官网🎉！"></a>🎉这里是StoneBot官网🎉！</h1><p>没错，我又来<strong>搞♂</strong>网站了（<del>还不是最近服务器不知道干啥好了）</del></p><hr><p>这次采用了Hexo的<strong>ButtyFly</strong>主题🦋（y1s1还挺好看）<br>开了这么久了，可能大家还不知道配置吧（<del>不会吧不会吧</del>)</p><h2 id="配置"><a href="#配置" class="headerlink" title="配置"></a>配置</h2><p><strong>腾讯云的4+50GB的配置🚀 （<del>感觉像恰饭</del>）</strong></p><hr><p>废话这么久，我来介绍一下StoneBot吧<br>StoneReBot是一款基于KiviBot的机器人(以下内容来自KiviBot官方，侵权必删)<br><code>KiviBot</code> 是使用 <a href="https://www.typescriptlang.org/">TypeScript</a> 语言编写的  <strong>轻量</strong> 、<strong>跨平台</strong> QQ 机器人框架。</p><p>框架提供了完备的状态监控、插件管理（支持热更新）、主副管理员机制、消息通知、请求处理功能以及友好的脚手架，开箱即用。框架完全开源，可扩展性强，插件开发简单，核心底层协议使用 <a href="https://github.com/takayama-lily/oicq">oicq v2</a>，API 众多，功能强大。另外，框架使用 <a href="https://nodejs.org/">node</a> 驱动，得益于 node 及其高效的 v8 引擎，KiviBot 的性能可观。**</p><h2 id="功能"><a href="#功能" class="headerlink" title="功能"></a>功能</h2><ul><li><input checked="" disabled="" type="checkbox"> <strong>查天气</strong>🌤</li><li><input checked="" disabled="" type="checkbox"> <strong>在线音乐</strong>🎵</li><li><input checked="" disabled="" type="checkbox"> <strong>百度百科</strong>🔍</li><li><input checked="" disabled="" type="checkbox"> <strong>小爱同学</strong>（<del>没想到吧</del>)</li><li><input checked="" disabled="" type="checkbox"> <strong>历史上的今天</strong>📕</li><li><input checked="" disabled="" type="checkbox"> <strong>赞我</strong> 👍</li><li><input disabled="" type="checkbox"> <del>请你吃一顿满汉全席</del>（Discord式Todo)<br>也就这样了</li></ul><h2 id="邀请"><a href="#邀请" class="headerlink" title="邀请"></a>邀请</h2><p>邀请请加<code>Admin</code>QQ<br><strong>2573889206</strong><br>or <a href="https://jq.qq.com/?_wv=1027&k=VWpDtpMb">QQ群</a></p><h3 id="感谢Arya的MarkDown写作支持！"><a href="#感谢Arya的MarkDown写作支持！" class="headerlink" title="感谢Arya的MarkDown写作支持！"></a>感谢<a href="https://markdown.lovejade.cn/">Arya</a>的MarkDown写作支持！</h3><p>（<del>对了这sb玩意写个文档还得用<code>npm</code>创建,还得不带编辑器,所以只能用Arya了</del>)</p>]]></content>
+      
+      
+      
+        <tags>
+            
+            <tag> 软件 </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
+      <title>Hello World</title>
+      <link href="/2022/12/21/hello-world/"/>
+      <url>/2022/12/21/hello-world/</url>
+      
+        <content type="html"><![CDATA[<link rel="stylesheet" class="aplayer-secondary-style-marker" href="\assets\css\APlayer.min.css"><script src="\assets\js\APlayer.min.js" class="aplayer-secondary-script-marker"></script><p>Welcome to <a href="https://hexo.io/">Hexo</a>! This is your very first post. Check <a href="https://hexo.io/docs/">documentation</a> for more info. If you get any problems when using Hexo, you can find the answer in <a href="https://hexo.io/docs/troubleshooting.html">troubleshooting</a> or you can ask me on <a href="https://github.com/hexojs/hexo/issues">GitHub</a>.</p><h2 id="Quick-Start"><a href="#Quick-Start" class="headerlink" title="Quick Start"></a>Quick Start</h2><h3 id="Create-a-new-post"><a href="#Create-a-new-post" class="headerlink" title="Create a new post"></a>Create a new post</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo new <span class="string">&quot;My New Post&quot;</span></span><br></pre></td></tr></table></figure><p>More info: <a href="https://hexo.io/docs/writing.html">Writing</a></p><h3 id="Run-server"><a href="#Run-server" class="headerlink" title="Run server"></a>Run server</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo server</span><br></pre></td></tr></table></figure><p>More info: <a href="https://hexo.io/docs/server.html">Server</a></p><h3 id="Generate-static-files"><a href="#Generate-static-files" class="headerlink" title="Generate static files"></a>Generate static files</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo generate</span><br></pre></td></tr></table></figure><p>More info: <a href="https://hexo.io/docs/generating.html">Generating</a></p><h3 id="Deploy-to-remote-sites"><a href="#Deploy-to-remote-sites" class="headerlink" title="Deploy to remote sites"></a>Deploy to remote sites</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo deploy</span><br></pre></td></tr></table></figure><p>More info: <a href="https://hexo.io/docs/one-command-deployment.html">Deployment</a></p>]]></content>
+      
+      
+      
+    </entry>
+    
+    
+  
+  
+</search>
