@@ -1,1 +1,0 @@
-var posts=["2022/12/21/StoneBot1-0-2发布！/","2022/12/21/hello-world/","2022/12/21/如何用VMware虚拟机安装macOS/"];function toRandomPost(){pjax.loadUrl('/'+posts[Math.floor(Math.random() * posts.length)]);};
